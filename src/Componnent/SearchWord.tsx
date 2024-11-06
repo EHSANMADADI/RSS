@@ -1,21 +1,25 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import filterIcon from "../Image/Group 10.svg";
 import KeyWord from "./KeyWord.tsx";
+import { useStore } from "./Store/store.tsx";
 
-interface Word {
-  content: string;
-}
 
 export default function SearchWord() {
-  const [words, setWords] = useState<Word[]>([]);
+  const { keywords, setKeywords } = useStore();
+ 
+  
+  const [words, setWords] = useState<string[]>(keywords);
   const [inputWord, setInputWord] = useState("");
+  useEffect(() => {
+    setKeywords(words);
+  }, [words]);
 
   // تابع افزودن کلمه به لیست
   const addWord = () => {
     if (inputWord.trim() !== "") {
-      setWords([...words, { content: inputWord.trim() }]);
+      setWords([...words,  inputWord.trim() ]);
       setInputWord(""); // پاک کردن ورودی بعد از افزودن
     }
   };
