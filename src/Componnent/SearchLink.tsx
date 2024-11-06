@@ -7,9 +7,9 @@ export default function SearchLink() {
   return (
     <div
       dir="rtl"
-      className="my-5 w-2/3 mx-auto flex items-center justify-start "
+      className="my-5 w-1/2 mx-auto flex items-center justify-start "
     >
-      <div className="flex items-center justify-between w-5/6 bg-white rounded border-b-[3px] border border-gray-300 ">
+      <div className="flex items-center justify-between w-9/12 bg-white rounded border-b-[3px] border border-gray-300 ">
         <div className="flex items-center">
           <span className="text-4xl text-gray-400 px-2 py-1 m-1">
             <MdAddLink />

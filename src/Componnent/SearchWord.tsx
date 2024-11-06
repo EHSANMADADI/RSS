@@ -26,7 +26,7 @@ export default function SearchWord() {
     <>
       <div
         dir="rtl"
-        className="my-5 w-2/3 mx-auto flex items-center justify-start"
+        className="my-5 w-1/2 mx-auto flex items-center justify-start"
       >
         <div className="flex items-center justify-between w-4/6 bg-white rounded border-b-[3px] border border-gray-300 ">
           <div className="flex items-center">
@@ -63,7 +63,7 @@ export default function SearchWord() {
           </div>
         </div>
       </div>
-      <div className="w-2/3 mx-auto flex items-center flex-wrap justify-end">
+      <div className="w-1/2 mx-auto flex items-center flex-wrap justify-end">
         <KeyWord words={words} onDelete={deleteWord} />
       </div>
     </>

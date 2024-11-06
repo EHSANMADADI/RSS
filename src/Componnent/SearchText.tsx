@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 export default function SearchText() {
   return (
-    <div dir="rtl" className="my-5 bg-white w-2/3 mx-auto rounded border-b-[3px] border border-gray-300">
+    <div dir="rtl" className="my-5 bg-white w-1/2 mx-auto rounded border-b-[3px] border border-gray-300">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <span className="text-4xl text-gray-400 px-2 py-1 m-1">
