@@ -5,11 +5,14 @@ import { IoLinkOutline } from "react-icons/io5";
 import { MdAddLink } from "react-icons/md";
 export default function SearchLink() {
   return (
-    <div dir="rtl" className="my-5 w-2/3 mx-auto flex items-center justify-start ">
+    <div
+      dir="rtl"
+      className="my-5 w-2/3 mx-auto flex items-center justify-start "
+    >
       <div className="flex items-center justify-between w-5/6 bg-white rounded border-b-[3px] border border-gray-300 ">
         <div className="flex items-center">
           <span className="text-4xl text-gray-400 px-2 py-1 m-1">
-          <MdAddLink />
+            <MdAddLink />
           </span>
           <div className="flex items-center w-full">
             <input
@@ -28,8 +31,12 @@ export default function SearchLink() {
           </button>
         </div>
       </div>
-      <span className="text-sm text-blue-800 font-bold px-1">مشاهده لینک های اضافه شده</span>
-      <span className="text-base text-blue-800 font-bold"><IoLinkOutline/></span>
+      <span className="text-sm text-blue-800 font-bold px-1 cursor-pointer">
+        مشاهده لینک های اضافه شده
+      </span>
+      <span className="text-base text-blue-800 font-bold">
+        <IoLinkOutline />
+      </span>
     </div>
   );
 }

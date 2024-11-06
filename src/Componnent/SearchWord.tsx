@@ -34,12 +34,19 @@ export default function SearchWord() {
               <img className="text-gray-600 opacity-40" src={filterIcon} />
             </span>
             <div className="flex items-center w-full">
-              <input
-                placeholder="کلمات کلیدی"
-                className="px-3 py-3 font-bold text-sm w-full outline-none hover:outline-none"
-                value={inputWord}
-                onChange={(e) => setInputWord(e.target.value)} // بروزرسانی مقدار ورودی
-              />
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addWord();
+                }}
+              >
+                <input
+                  placeholder="کلمات کلیدی"
+                  className="px-3 py-3 font-bold text-sm w-full outline-none hover:outline-none"
+                  value={inputWord}
+                  onChange={(e) => setInputWord(e.target.value)} // بروزرسانی مقدار ورودی
+                />
+              </form>
             </div>
           </div>
 

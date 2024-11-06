@@ -3,6 +3,7 @@ import Navbar from "../Componnent/Navbar.tsx";
 import SearchText from "../Componnent/SearchText.tsx";
 import SearchLink from "../Componnent/SearchLink.tsx";
 import SearchWord from "../Componnent/SearchWord.tsx";
+import ResultSearch from "../Componnent/ResultSearch.tsx";
 
 export default function FerstPageComponent() {
   return (
@@ -11,6 +12,7 @@ export default function FerstPageComponent() {
       <SearchText/>
       <SearchLink/>
       <SearchWord/>
+      <ResultSearch/>
     </div>
   );
 }
