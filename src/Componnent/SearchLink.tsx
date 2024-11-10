@@ -7,11 +7,11 @@ export default function SearchLink() {
   return (
     <div
       dir="rtl"
-      className="my-5 w-1/2 mx-auto flex items-center justify-start "
+      className="my-5 lg:w-1/2 w-5/6 mx-auto flex items-center justify-start "
     >
       <div className="flex items-center justify-between w-9/12 bg-white rounded border-b-[3px] border border-gray-300 ">
         <div className="flex items-center">
-          <span className="text-4xl text-gray-400 px-2 py-1 m-1">
+          <span className="md:text-4xl text-2xl text-gray-400 px-2 py-1 m-1">
             <MdAddLink />
           </span>
           <div className="flex items-center w-full">
@@ -24,10 +24,10 @@ export default function SearchLink() {
 
         <div className="flex items-center">
           <button className="bg-blue-700 flex items-center text-white pr-7 pl-4 py-4 crated hover:bg-blue-800 duration-200 hover:scale-105">
-            <span className="text-3xl mx-2">
+            <span className="lg:text-3xl text-base mx-2">
               <MdAddLink />
             </span>
-            افزودن صفحات وب
+            <span className="lg:inline hidden">افزودن صفحات وب</span>
           </button>
         </div>
       </div>

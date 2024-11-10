@@ -30,7 +30,7 @@ export default function SearchWord() {
     <>
       <div
         dir="rtl"
-        className="my-5 w-1/2 mx-auto flex items-center justify-start"
+        className="my-5 lg:w-1/2 w-5/6 mx-auto flex items-center justify-start"
       >
         <div className="flex items-center justify-between w-4/6 bg-white rounded border-b-[3px] border border-gray-300 ">
           <div className="flex items-center">
@@ -59,15 +59,15 @@ export default function SearchWord() {
               className="bg-blue-700 flex items-center text-white pr-7 pl-4 py-4 crated hover:bg-blue-800 duration-200 hover:scale-105"
               onClick={addWord} // فراخوانی تابع افزودن کلمه هنگام کلیک
             >
-              <span className="text-3xl mx-2">
+              <span className="md:text-3xl text-xl mx-2">
                 <IoMdAdd />
               </span>
-              افزودن
+              <span className="lg:inline hidden">افزودن</span>
             </button>
           </div>
         </div>
       </div>
-      <div className="w-1/2 mx-auto flex items-center flex-wrap justify-end">
+      <div className="lg:w-1/2 w-5/6 mx-auto flex items-center flex-wrap justify-end">
         <KeyWord words={words} onDelete={deleteWord} />
       </div>
     </>

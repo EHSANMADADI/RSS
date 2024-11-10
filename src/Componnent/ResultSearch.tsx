@@ -4,7 +4,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 export default function ResultSearch() {
   return (
     <div>
-      <div className="flex items-center justify-between w-1/2 mx-auto">
+      <div className="flex items-center justify-between lg:w-1/2 w-11/12 mx-auto">
         <div className="text-gray-500 text-lg flex items-center font-semibold ">
           <span>
             <MdFilterListAlt />
@@ -17,10 +17,10 @@ export default function ResultSearch() {
       </div>
       <div
         dir="rtl"
-        className="w-1/2 bg-white rounded-md flex justify-between items-center  px-5 py-3 mx-auto my-5 cursor-pointer hover:bg-gray-300 duration-300 hover:scale-110"
+        className="lg:w-1/2 w-5/6 bg-white rounded-md flex justify-between items-center  px-5 py-3 mx-auto my-5 cursor-pointer hover:bg-gray-300 duration-300 hover:scale-110"
       >
-        <div className="w-5/6">
-          <p className="text-blue-700 font-bold text-xl leading-8 mx-3">
+        <div className="md:w-5/6 w-full">
+          <p className="text-blue-700 font-bold md:text-xl text-lg leading-8 mx-3">
             در اینجا متن هدر نمایش داده خواهد شدو همچنین کلمات کلیدی که در بالا
             انتخاب شده است باید به رنگ زرد در آید
           </p>
@@ -29,7 +29,7 @@ export default function ResultSearch() {
             <p className="text-gray-400 font-black text-base">تاریخ:1403/5/5</p>
           </div>
         </div>
-        <span className="text-3xl">
+        <span className="md:text-3xl text-xl">
           <FaExternalLinkAlt />
         </span>
       </div>
