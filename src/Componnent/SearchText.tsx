@@ -5,7 +5,7 @@ export default function SearchText() {
   return (
     <div dir="rtl" className="my-5 bg-white lg:w-1/2 w-5/6 mx-auto rounded border-b-[3px] border border-gray-300">
       <div className="flex items-center justify-between w-full">
-        <div className="flex items-center">
+        <div className="flex items-center w-2/3">
           <span className="text-4xl text-gray-400 px-2 py-1 m-1">
             <CiSearch />
           </span>

@@ -6,12 +6,16 @@ import KeyWord from "./KeyWord.tsx";
 import { useStore } from "./Store/store.tsx";
 import api from "../Config/api.ts";
 import Loader from "../Image/tail-spin.svg";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+type Keyword = {
+  id: number;
+  word: string;
+};
 export default function SearchWord() {
   const { keywords, setKeywords } = useStore();
   const [Loading, setLoading] = useState(false);
-  const [words, setWords] = useState<string[]>(keywords);
+  const [words, setWords] = useState<Keyword[]>(keywords);
   const [inputWord, setInputWord] = useState("");
   useEffect(() => {
     setKeywords(words);
@@ -25,14 +29,14 @@ export default function SearchWord() {
         .post("/api/keywords", { keyword: words })
         .then((response) => {
           console.log(response);
-          setWords([...words, inputWord.trim()]);
+          //setWords([...words, inputWord.trim()]);  completed by response
           setInputWord(""); // پاک کردن ورودی بعد از افزودن
           setLoading(false);
         })
         .catch((err) => {
           console.log("err=>>>>", err);
           setLoading(false);
-          toast.error('مشکلی پیش آمده لطفا دوباره تلاش کنید');
+          toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");
         })
         .finally(() => {
           setLoading(false);
@@ -40,8 +44,8 @@ export default function SearchWord() {
         });
     }
   };
-  const deleteWord = (index: number) => {
-    setWords(words.filter((_, i) => i !== index));
+  const deleteWord = (id: number) => {
+    setWords(words.filter((item) => item.id !== id));
   };
   return (
     <>
@@ -73,7 +77,7 @@ export default function SearchWord() {
 
           <div className="flex items-center">
             <button
-              className="bg-blue-700 flex items-center text-white pr-7 pl-4 py-4 crated hover:bg-blue-800 duration-200 hover:scale-105"
+              className="bg-blue-700 flex items-center text-white pr-7 pl-5 py-4 crated hover:bg-blue-800 duration-200 hover:scale-105"
               onClick={addWord} // فراخوانی تابع افزودن کلمه هنگام کلیک
             >
               {!Loading && (
@@ -81,10 +85,10 @@ export default function SearchWord() {
                   <span className="md:text-3xl text-xl mx-2">
                     <IoMdAdd />
                   </span>
-                  <span className="lg:inline hidden">افزودن</span>
+                  <span className="lg:inline hidden">اضافه کردن</span>
                 </>
               )}
-              {Loading&&<img className="max-w-9 max-h-9" src={Loader}/>}
+              {Loading && <img className="max-w-9 max-h-9" src={Loader} />}
             </button>
           </div>
         </div>
@@ -92,7 +96,7 @@ export default function SearchWord() {
       <div className="lg:w-1/2 w-5/6 mx-auto flex items-center flex-wrap justify-end">
         <KeyWord words={words} onDelete={deleteWord} />
       </div>
-      <ToastContainer position='bottom-right' />
+      <ToastContainer position="bottom-right" />
     </>
   );
 }

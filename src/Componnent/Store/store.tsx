@@ -1,14 +1,19 @@
 import { create } from 'zustand'
 
+type Keyword = {
+  id: number
+  word: string
+}
+
 type Store = {
-  keywords:string[]
-  setKeywords:(value:string[]) => void
+  keywords: Keyword[]
+  setKeywords: (value: Keyword[]) => void
 }
 
 export const useStore = create<Store>()((set) => ({
- keywords:[],
- setKeywords:(value)=>set(()=>({
-    keywords:value
- }))
+  keywords: [],
+  setKeywords: (value) =>
+    set((state) => ({
+      keywords: [...state.keywords, ...value]
+    }))
 }))
-
