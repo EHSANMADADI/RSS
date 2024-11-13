@@ -16,6 +16,7 @@ export default function ResultSearch() {
         </span>
       </div>
       <div
+      
         dir="rtl"
         className="lg:w-1/2 w-5/6 bg-white rounded-md flex justify-between items-center  px-5 py-3 mx-auto my-5 cursor-pointer hover:bg-gray-300 duration-300 hover:scale-110"
       >

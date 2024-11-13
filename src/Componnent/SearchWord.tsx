@@ -4,12 +4,13 @@ import { IoMdAdd } from "react-icons/io";
 import filterIcon from "../Image/Group 10.svg";
 import KeyWord from "./KeyWord.tsx";
 import { useStore } from "./Store/store.tsx";
-
-
+import api from "../Config/api.ts";
+import Loader from "../Image/tail-spin.svg";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function SearchWord() {
   const { keywords, setKeywords } = useStore();
- 
-  
+  const [Loading, setLoading] = useState(false);
   const [words, setWords] = useState<string[]>(keywords);
   const [inputWord, setInputWord] = useState("");
   useEffect(() => {
@@ -19,8 +20,24 @@ export default function SearchWord() {
   // تابع افزودن کلمه به لیست
   const addWord = () => {
     if (inputWord.trim() !== "") {
-      setWords([...words,  inputWord.trim() ]);
-      setInputWord(""); // پاک کردن ورودی بعد از افزودن
+      setLoading(true);
+      api
+        .post("/api/keywords", { keyword: words })
+        .then((response) => {
+          console.log(response);
+          setWords([...words, inputWord.trim()]);
+          setInputWord(""); // پاک کردن ورودی بعد از افزودن
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log("err=>>>>", err);
+          setLoading(false);
+          toast.error('مشکلی پیش آمده لطفا دوباره تلاش کنید');
+        })
+        .finally(() => {
+          setLoading(false);
+          setInputWord("");
+        });
     }
   };
   const deleteWord = (index: number) => {
@@ -59,10 +76,15 @@ export default function SearchWord() {
               className="bg-blue-700 flex items-center text-white pr-7 pl-4 py-4 crated hover:bg-blue-800 duration-200 hover:scale-105"
               onClick={addWord} // فراخوانی تابع افزودن کلمه هنگام کلیک
             >
-              <span className="md:text-3xl text-xl mx-2">
-                <IoMdAdd />
-              </span>
-              <span className="lg:inline hidden">افزودن</span>
+              {!Loading && (
+                <>
+                  <span className="md:text-3xl text-xl mx-2">
+                    <IoMdAdd />
+                  </span>
+                  <span className="lg:inline hidden">افزودن</span>
+                </>
+              )}
+              {Loading&&<img className="max-w-9 max-h-9" src={Loader}/>}
             </button>
           </div>
         </div>
@@ -70,6 +92,7 @@ export default function SearchWord() {
       <div className="lg:w-1/2 w-5/6 mx-auto flex items-center flex-wrap justify-end">
         <KeyWord words={words} onDelete={deleteWord} />
       </div>
+      <ToastContainer position='bottom-right' />
     </>
   );
 }

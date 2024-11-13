@@ -9,7 +9,7 @@ export default function SearchLink() {
       dir="rtl"
       className="my-5 lg:w-1/2 w-5/6 mx-auto flex items-center justify-start "
     >
-      <div className="flex items-center justify-between w-9/12 bg-white rounded border-b-[3px] border border-gray-300 ">
+      <div className="flex items-center justify-between w-10/12 bg-white rounded border-b-[3px] border border-gray-300 ">
         <div className="flex items-center">
           <span className="md:text-4xl text-2xl text-gray-400 px-2 py-1 m-1">
             <MdAddLink />
@@ -31,12 +31,10 @@ export default function SearchLink() {
           </button>
         </div>
       </div>
-      <span className="text-sm text-blue-800 font-bold px-1 cursor-pointer">
+      <span className="text-sm text-blue-800 font-bold px-1 cursor-pointer hover:border-b hover:scale-105 mx-1 hover:border-blue-300 duration-300">
         مشاهده لینک های اضافه شده
       </span>
-      <span className="text-base text-blue-800 font-bold">
-        <IoLinkOutline />
-      </span>
+      
     </div>
   );
 }
