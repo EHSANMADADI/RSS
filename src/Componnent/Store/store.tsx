@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 type Keyword = {
   id: number
-  word: string
+  keyword: string
 }
 
 type Store = {

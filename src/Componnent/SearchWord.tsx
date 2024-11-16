@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 type Keyword = {
   id: number;
-  word: string;
+  keyword: string;
 };
 export default function SearchWord() {
   const { keywords, setKeywords } = useStore();
@@ -26,12 +26,13 @@ export default function SearchWord() {
     if (inputWord.trim() !== "") {
       setLoading(true);
       api
-        .post("/api/keywords", { keyword: words })
+        .post("/api/keywords", { keyword: inputWord })
         .then((response) => {
           console.log(response);
-          //setWords([...words, inputWord.trim()]);  completed by response
+          setWords([...words, response.data.keyword]);
           setInputWord(""); // پاک کردن ورودی بعد از افزودن
           setLoading(false);
+          toast.success("کلمه کلیدی با موفقیت اضافه شد");
         })
         .catch((err) => {
           console.log("err=>>>>", err);
@@ -45,7 +46,16 @@ export default function SearchWord() {
     }
   };
   const deleteWord = (id: number) => {
-    setWords(words.filter((item) => item.id !== id));
+    api
+      .delete(`/api/keywords/${id}`)
+      .then((res) => {
+        console.log(res);
+        setWords(words.filter((item) => item.id !== id));
+      })
+      .catch((err) => {
+        toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");
+         console.log(err);
+      });
   };
   return (
     <>

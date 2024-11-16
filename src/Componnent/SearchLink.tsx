@@ -77,7 +77,7 @@ export default function SearchLink() {
       <Modal Open={isOpen} onClose={() => setIsOpen(false)}>
         <div dir="rtl" className="p-10">
           <h3 className="text-xl font-bold ">
-            در این قسمت میتوانید برای نام منبع را وارد نمایید
+            در این قسمت میتوانید  نام منبع را وارد نمایید
           </h3>
           <div className="mx-5 my-5">
             <label className="text-black font-black text-xl">
