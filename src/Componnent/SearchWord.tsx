@@ -50,7 +50,7 @@ export default function SearchWord() {
       .delete(`/api/keywords/${id}`)
       .then((res) => {
         console.log(res);
-      
+        setWords(words.filter((item) => item.id !== id));
         
       })
       .catch((err) => {

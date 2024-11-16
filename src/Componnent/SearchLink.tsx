@@ -31,7 +31,7 @@ export default function SearchLink() {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.message === "Feed with this URL already exists") {
+        if (err.response.data?.message === "Feed with this URL already exists") {
           toast.info("این منبع وجود دارد");
         } else {
           toast.error("مشکلی پیش‌آمده لطفا دوباره تلاش کنید");
@@ -48,6 +48,7 @@ export default function SearchLink() {
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.message);
       });
   }, [showLinks]);
 
