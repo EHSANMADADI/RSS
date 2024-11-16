@@ -54,7 +54,7 @@ export default function SearchWord() {
       })
       .catch((err) => {
         toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");
-         console.log(err);
+        console.log(err);
       });
   };
   return (

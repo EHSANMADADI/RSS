@@ -1,16 +1,24 @@
-import React, { useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { IoIosSearch } from "react-icons/io";
-import { IoLinkOutline } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
 import { MdAddLink } from "react-icons/md";
 import Modal from "./Modal.tsx";
 import api from "../Config/api.ts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TiDeleteOutline } from "react-icons/ti";
+interface listLink {
+  active: boolean;
+  id: number;
+  source: string;
+  url: string;
+}
 export default function SearchLink() {
   const [isOpen, setIsOpen] = useState(false);
   const [Link, setLink] = useState("");
   const [LinkName, setLinkName] = useState("");
+  const [showLinks, setShowLinks] = useState(false);
+  const [linkList, setLinkList] = useState<listLink[]>([]);
+
+
   const addLink = () => {
     api
       .post("/api/feeds", {
@@ -26,13 +34,38 @@ export default function SearchLink() {
         if (err.response.data.message === "Feed with this URL already exists") {
           toast.info("این منبع وجود دارد");
         } else {
-          toast.error('مشکلی پیش‌آمده لطفا دوباره تلاش کنید');
+          toast.error("مشکلی پیش‌آمده لطفا دوباره تلاش کنید");
         }
-      })
-      .finally(() => {
-        setIsOpen(false);
       });
   };
+
+  useEffect(() => {
+    api
+      .get("/api/feeds")
+      .then((res) => {
+        console.log(res);
+        setLinkList(res.data.feeds);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [showLinks]);
+
+
+  const deletItem = (id: number) => {
+    api
+      .delete(`/api/feeds/${id}`)
+      .then((res) => {
+        console.log(res);
+        setLinkList(linkList.filter((item) => item.id !== id));
+        //toast.success("منبع با موفقیت حذف شد");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");
+      });
+  };
+
   return (
     <div
       dir="rtl"
@@ -71,13 +104,18 @@ export default function SearchLink() {
           </button>
         </div>
       </div>
-      <span className="text-sm text-blue-800 font-bold px-1 cursor-pointer hover:border-b hover:scale-105 mx-1 hover:border-blue-300 duration-300">
+      <span
+        onClick={() => {
+          setShowLinks(true);
+        }}
+        className="text-sm text-blue-800 font-bold px-1 cursor-pointer hover:border-b hover:scale-105 mx-1 hover:border-blue-300 duration-300"
+      >
         مشاهده لینک های اضافه شده
       </span>
       <Modal Open={isOpen} onClose={() => setIsOpen(false)}>
         <div dir="rtl" className="p-10">
           <h3 className="text-xl font-bold ">
-            در این قسمت میتوانید  نام منبع را وارد نمایید
+            در این قسمت میتوانید نام منبع را وارد نمایید
           </h3>
           <div className="mx-5 my-5">
             <label className="text-black font-black text-xl">
@@ -100,6 +138,83 @@ export default function SearchLink() {
           </div>
         </div>
       </Modal>
+      <Modal
+        Open={showLinks}
+        onClose={() => {
+          setShowLinks(false);
+        }}
+      >
+        <div className="max-h-[90vh] overflow-y-auto">
+          <table className="w-full text-base font-bold text-left rtl:text-right text-gray-500 overflow-auto rounded-md">
+            <thead className="text-lg font-black text-gray-700 uppercase bg-gray-300">
+              <tr>
+                <th scope="col" className="lg:px-3 lg:py-3 px-3 py-2">
+                  شناسه
+                </th>
+                <th scope="col" className="lg:px-3 lg:py-3 px-3 py-2">
+                  نام
+                </th>
+                <th scope="col" className="lg:px-3 lg:py-3 px-3 py-2">
+                  آدرس
+                </th>
+                <th
+                  scope="col"
+                  className="lg:px-3 lg:py-3 px-3 py-2 text-center"
+                >
+                  وضعیت
+                </th>
+                <th scope="col" className="lg:px-3 lg:py-3 px-3 py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {linkList.map((item) => (
+                <tr className="bg-gray-200 border-b-white border hover:bg-gray-50">
+                  <th
+                    scope="row"
+                    className="lg:px-2 lg:py-3 px-3 py-2 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {item.id}
+                  </th>
+                  <th
+                    scope="row"
+                    className="lg:px-2 lg:py-3 px-3 py-2 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {item.source}
+                  </th>
+                  <th
+                    scope="row"
+                    className="lg:px-1 lg:py-3 px-1 py-2 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {item.url}
+                  </th>
+                  <th
+                    scope="row"
+                    className="lg:px-2 lg:py-3 px-3 py-2 font-medium text-gray-900 whitespace-nowrap text-center"
+                  >
+                    {item.active ? (
+                      <span className="text-green-600 font-bold">فعال</span>
+                    ) : (
+                      <span>غیر فعال</span>
+                    )}
+                  </th>
+                  <th
+                    onClick={() => {
+                      deletItem(item.id);
+                    }}
+                    scope="row"
+                    className="lg:px-2 lg:py-3 px-3 py-2 text-center font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    <span className="text-red-500 text-xl cursor-pointer hover:text-red-700">
+                      <TiDeleteOutline />
+                    </span>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Modal>
+
       <ToastContainer position="bottom-right" />
     </div>
   );
