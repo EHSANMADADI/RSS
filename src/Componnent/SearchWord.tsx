@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import filterIcon from "../Image/Group 10.svg";
 import KeyWord from "./KeyWord.tsx";
-import { useStore } from "./Store/store.tsx";
+import { useStore } from "./Store/store.ts";
 import api from "../Config/api.ts";
 import Loader from "../Image/tail-spin.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,7 +50,8 @@ export default function SearchWord() {
       .delete(`/api/keywords/${id}`)
       .then((res) => {
         console.log(res);
-        setWords(words.filter((item) => item.id !== id));
+      
+        
       })
       .catch((err) => {
         toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");
