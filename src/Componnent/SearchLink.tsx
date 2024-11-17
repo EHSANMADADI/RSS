@@ -168,8 +168,8 @@ export default function SearchLink() {
               </tr>
             </thead>
             <tbody>
-              {linkList.map((item) => (
-                <tr className="bg-gray-200 border-b-white border hover:bg-gray-50">
+              {linkList.map((item,i) => (
+                <tr key={i} className="bg-gray-200 border-b-white border hover:bg-gray-50">
                   <th
                     scope="row"
                     className="lg:px-2 lg:py-3 px-3 py-2 font-medium text-gray-900 whitespace-nowrap"

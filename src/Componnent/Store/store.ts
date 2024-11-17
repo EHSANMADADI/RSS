@@ -4,12 +4,17 @@ type Keyword = {
   id: number;
   keyword: string;
 };
+type articles={
+  link:string;
+  source:string;
+  title:string;
+}
 
 type Store = {
   keywords: Keyword[];
   setKeywords: (value: Keyword[]) => void;
-  articles: [];
-  setArticles: (value: []) => void;
+  articles:articles[];
+  setArticles: (value:articles[]) => void;
 };
 
 export const useStore = create<Store>()((set) => ({
@@ -22,6 +27,6 @@ export const useStore = create<Store>()((set) => ({
   articles: [],
   setArticles: (value) =>
     set((state) => ({
-      articles: value,
+      articles: [...value],
     })),
 }));
