@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FiDelete } from "react-icons/fi";
-
+import api from '../Config/api.ts';
+import { useStore } from './Store/store.ts';
 
 type Keyword = {
   id: number
@@ -13,7 +14,8 @@ interface KeyWordProps {
 
 
 const KeyWord: React.FC<KeyWordProps> = ({ words,onDelete  }) => {
-
+  const{keywords,setKeywords}=useStore()
+  
   
   return (
     <div className="flex flex-wrap w-full items-center  justify-end">

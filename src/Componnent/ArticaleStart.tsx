@@ -16,6 +16,8 @@ export default function ArticaleStart() {
     try {
       const res = await api.get(`/api/articles?page=${page}&per_page=${pageSize}`);
       setArticles(res.data.articles);
+      console.log(res.data.articles);
+      
       setTotalPages(res.data.total_pages);
     } catch (err) {
       console.error("Error fetching articles:", err);

@@ -3,6 +3,7 @@ import { MdFilterListAlt } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useStore } from "./Store/store.ts";
 import { TbMoodEmpty } from "react-icons/tb";
+import { Link } from "react-router-dom";
 export default function ResultSearch() {
   const { articles } = useStore();
   return (
@@ -38,13 +39,14 @@ export default function ResultSearch() {
                   {articel.title}
                 </p>
                 <div className="flex items-center justify-between">
-                  <p className="text-gray-400 font-black text-base">منبع:{articel.source}</p>
+                  <p className="text-gray-400 font-black text-base">{articel.source}</p>
+                  <p className="text-gray-400 font-black text-base">{articel.published}</p>
                   
                 </div>
               </div>
-              <span className="md:text-3xl text-xl">
+              <Link className="md:text-3xl text-xl" to={articel.link}>
                 <FaExternalLinkAlt />
-              </span>
+              </Link>
             </div>)
           })}
           

@@ -20,6 +20,18 @@ export default function SearchWord() {
   useEffect(() => {
     setKeywords(words);
   }, [words]);
+  useEffect(() => {
+    api
+      .get("/api/keywords")
+      .then((res) => {
+        console.log(res.data.keywords);
+        setKeywords([...keywords, ...res.data.keywords]);
+        setWords([...keywords, ...res.data.keywords]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // تابع افزودن کلمه به لیست
   const addWord = () => {
@@ -51,7 +63,6 @@ export default function SearchWord() {
       .then((res) => {
         console.log(res);
         setWords(words.filter((item) => item.id !== id));
-        
       })
       .catch((err) => {
         toast.error("مشکلی پیش آمده لطفا دوباره تلاش کنید");

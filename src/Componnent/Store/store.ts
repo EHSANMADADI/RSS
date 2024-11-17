@@ -8,6 +8,7 @@ type articles={
   link:string;
   source:string;
   title:string;
+  published:string
 }
 
 type Store = {
