@@ -8,7 +8,7 @@ import ArticaleStart from "../Componnent/ArticaleStart.tsx";
 
 export default function FerstPageComponent() {
   return (
-    <div className="bg-gray-200 w-full h-full">
+    <div className="bg-gray-200 w-full max-h-full ">
       <Navbar />
       <SearchText/>
       <SearchLink/>

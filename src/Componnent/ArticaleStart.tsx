@@ -14,11 +14,15 @@ export default function ArticaleStart() {
   const fetchArticles = async () => {
     setLoading(true);
     try {
-      const res = await api.get(`/api/articles?page=${page}&per_page=${pageSize}`);
-      setArticles(res.data.articles);
-      console.log(res.data.articles);
-      
-      setTotalPages(res.data.total_pages);
+      api
+        .get(`/api/articles?page=${page}&per_page=${pageSize}`)
+        .then((res) => {
+          setArticles(res.data.articles);
+          console.log("کاوش", res.data.articles);
+
+          setTotalPages(res.data.total_pages);
+        })
+        .catch((err) => console.log(err));
     } catch (err) {
       console.error("Error fetching articles:", err);
     } finally {
@@ -33,9 +37,9 @@ export default function ArticaleStart() {
 
   return (
     <div className="mb-4">
-      <div className="flex justify-end w-1/2 h-auto mx-auto">
+      <div className="flex justify-end lg:w-1/2 w-5/6 h-auto mx-auto">
         <button
-          onClick={() => setPage(1)}
+          onClick={() => fetchArticles()}
           className="text-white bg-blue-700 px-8 text-base hover:bg-blue-500 hover:scale-110 duration-300 font-semibold py-3 rounded-md"
         >
           {loading ? <span>صبر کنید</span> : <span>کاوش</span>}
@@ -51,7 +55,7 @@ export default function ArticaleStart() {
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             className="px-4 py-2 bg-blue-500 text-white rounded-l-md hover:bg-blue-600"
           >
-           <FaAngleDoubleLeft/> 
+            <FaAngleDoubleLeft />
           </button>
         )}
         <span className="px-4 py-2 text-gray-700">
@@ -62,7 +66,7 @@ export default function ArticaleStart() {
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
           >
-            <FaAngleDoubleRight/>
+            <FaAngleDoubleRight />
           </button>
         )}
       </div>

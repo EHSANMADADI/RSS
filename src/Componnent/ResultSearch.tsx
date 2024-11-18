@@ -29,27 +29,31 @@ export default function ResultSearch() {
               : نتیجه جست‌وجو
             </span>
           </div>
-          {articles.map((articel,i)=>{
-            return(<div
-             key={i}
-              className="lg:w-1/2 w-5/6 bg-white rounded-md flex justify-between items-center  px-5 py-3 mx-auto my-5 cursor-pointer hover:bg-gray-300 duration-300 hover:scale-110"
-            >
-              <div className="md:w-5/6 w-full">
-                <p className="text-blue-700 font-bold md:text-xl text-lg leading-8 mx-3">
-                  {articel.title}
-                </p>
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-400 font-black text-base">{articel.source}</p>
-                  <p className="text-gray-400 font-black text-base">{articel.published}</p>
-                  
+          {articles.map((articel, i) => {
+            return (
+              <div
+                key={i}
+                className="lg:w-1/2 w-5/6 bg-white rounded-md flex justify-between items-center  px-5 py-3 mx-auto my-5 cursor-pointer hover:bg-gray-300 duration-300 hover:scale-110"
+              >
+                <div className="md:w-5/6 w-full">
+                  <p className="text-blue-700 font-bold md:text-xl text-lg leading-8 mx-3">
+                    {articel.title}
+                  </p>
+                  <div className="flex items-center justify-between my-2">
+                    <p className="text-gray-400 font-normal text-base">
+                      {articel.source}
+                    </p>
+                    <p className="text-gray-400 font-normal text-base">
+                      {articel.published}
+                    </p>
+                  </div>
                 </div>
+                <Link className="md:text-3xl text-xl" to={articel.link}>
+                  <FaExternalLinkAlt />
+                </Link>
               </div>
-              <Link className="md:text-3xl text-xl" to={articel.link}>
-                <FaExternalLinkAlt />
-              </Link>
-            </div>)
+            );
           })}
-          
         </>
       )}
     </div>
