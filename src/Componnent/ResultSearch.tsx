@@ -4,8 +4,16 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useStore } from "./Store/store.ts";
 import { TbMoodEmpty } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { CiSquareRemove } from "react-icons/ci";
+import api from "../Config/api.ts";
 export default function ResultSearch() {
-  const { articles } = useStore();
+  const { articles,setArticles } = useStore();
+  const deleteArticles = (id: number) => {
+    api.delete(`/api/articles/${id}`).then(() => {
+      const newArticles = articles.filter((article) => article.id!== id);
+      setArticles(newArticles);
+    });
+  };
   return (
     <div>
       {articles.length === 0 && (
@@ -48,9 +56,17 @@ export default function ResultSearch() {
                     </p>
                   </div>
                 </div>
-                <Link className="md:text-3xl text-xl" to={articel.link}>
-                  <FaExternalLinkAlt />
-                </Link>
+                <div className="flex items-center">
+                  <Link className="md:text-3xl text-xl" to={articel.link}>
+                    <FaExternalLinkAlt />
+                  </Link>
+                  <span
+                    onClick={() => deleteArticles(articel.id)}
+                    className="text-red-700 lg:text-4xl text-base mx-3"
+                  >
+                    <CiSquareRemove />
+                  </span>
+                </div>
               </div>
             );
           })}

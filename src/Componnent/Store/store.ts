@@ -9,6 +9,7 @@ type articles={
   source:string;
   title:string;
   published:string
+  id:number
 }
 
 type Store = {

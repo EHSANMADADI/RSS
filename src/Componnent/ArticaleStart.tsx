@@ -4,6 +4,8 @@ import { useStore } from "./Store/store.ts";
 import ResultSearch from "./ResultSearch.tsx";
 import { FaAngleDoubleLeft } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
+import { CiSquareRemove } from "react-icons/ci";
+
 export default function ArticaleStart() {
   const { articles, setArticles } = useStore();
   const [loading, setLoading] = useState(false);
