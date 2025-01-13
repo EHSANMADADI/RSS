@@ -44,7 +44,7 @@ export default function ArticaleStart() {
           onClick={() => fetchArticles()}
           className="text-white bg-blue-700 px-8 text-base hover:bg-blue-500 hover:scale-110 duration-300 font-semibold py-3 rounded-md"
         >
-          {loading ? <span>صبر کنید</span> : <span>کاوش</span>}
+          {loading ? (<span>صبر کنید</span>) :( <span>کاوش</span>)}
         </button>
       </div>
 

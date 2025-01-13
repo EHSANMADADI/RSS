@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 
 export default function Modal(props: {
-  Open: Boolean;
+  Open: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }) {

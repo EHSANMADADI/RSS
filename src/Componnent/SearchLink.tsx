@@ -27,6 +27,7 @@ export default function SearchLink() {
       })
       .then((res) => {
         console.log(res);
+        setIsOpen(false)
         toast.success("منبع با موفقیت اضافه شد");
       })
       .catch((err) => {
@@ -184,7 +185,7 @@ export default function SearchLink() {
                   </th>
                   <th
                     scope="row"
-                    className="lg:px-1 lg:py-3 px-1 py-2 font-medium text-gray-900 whitespace-nowrap"
+                    className="lg:px-1 lg:py-3 px-1 py-2 font-medium text-gray-900 whitespace-normal"
                   >
                     {item.url}
                   </th>

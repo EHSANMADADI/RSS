@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import filterIcon from "../Image/Group 10.svg";
+import filterIcon from "../Image/Group.svg";
 import KeyWord from "./KeyWord.tsx";
 import { useStore } from "./Store/store.ts";
 import api from "../Config/api.ts";
@@ -107,7 +107,7 @@ export default function SearchWord() {
                   <span className="md:text-3xl text-xl mx-2">
                     <IoMdAdd />
                   </span>
-                  <span className="lg:inline hidden">اضافه کردن</span>
+                  <span className="lg:inline hidden">افزودن</span>
                 </>
               )}
               {Loading && <img className="max-w-9 max-h-9" src={Loader} />}
