@@ -13,20 +13,20 @@ export default function ArticaleStart() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const pageSize = 5;
-  useEffect(() => {
-    if (keywords.length === 0) {
-      api
-        .get("/api/fetch-all-articles")
-        .then((res) => {
-          console.log(res);
-          fetchArticles();
-        })
-        .catch((err) => console.log("error fetch all articles", err));
-    }
-  }, [keywords]);
+  // useEffect(() => {
+  //   if (keywords.length === 0) {
+  //     api
+  //       .get("/api/fetch-all-articles")
+  //       .then((res) => {
+  //         console.log(res);
 
-  const fetchArticles =  () => {
-   
+  //         fetchArticles();
+  //       })
+  //       .catch((err) => console.log("error fetch all articles", err));
+  //   }
+  // }, [keywords]);
+
+  const fetchArticles = () => {
     try {
       setLoading(true);
       api
@@ -40,15 +40,22 @@ export default function ArticaleStart() {
         .catch((err) => console.log(err));
     } catch (err) {
       console.error("Error fetching articles:", err);
-    } 
+    }
   };
 
-  // Load articles whenever the page changes
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     fetchArticles();
   }, [page]);
-console.log(loading);
+
+  const deleteArticles = (id: number) => {
+    api.delete(`/api/articles/${id}`).then(() => {
+      const newArticles = articles.filter((article) => article.id !== id);
+      setArticles(newArticles);
+      setLoading(true);
+      fetchArticles();
+    });
+  };
 
   return (
     <>
@@ -57,45 +64,45 @@ console.log(loading);
           <img src={Loader} alt="loading ..." width={60} height={60} />
         </div>
       )}
-      {
-        !loading &&    <div className="mb-4">
-        <div className="flex justify-end lg:w-1/2 w-5/6 h-auto mx-auto">
-          <button
-            onClick={() => fetchArticles()}
-            className="text-white bg-blue-700 px-8 text-base hover:bg-blue-500 hover:scale-110 duration-300 font-semibold py-3 rounded-md"
-          >
-            {loading ? <span>صبر کنید</span> : <span>کاوش</span>}
-          </button>
-        </div>
-
-        <ResultSearch />
-
-        {/* Pagination */}
-        <div className="flex justify-center pb-10 my-4">
-          {page > 1 && (
+      {!loading && (
+        <div className="mb-4">
+          <div className="flex justify-end lg:w-1/2 w-5/6 h-auto mx-auto">
             <button
-              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              className="px-4 py-2 bg-blue-500 text-white rounded-l-md hover:bg-blue-600"
+              onClick={() => fetchArticles()}
+              className="text-white bg-blue-700 px-8 text-base hover:bg-blue-500 hover:scale-110 duration-300 font-semibold py-3 rounded-md"
             >
-              <FaAngleDoubleLeft />
+              {loading ? <span>صبر کنید</span> : <span>کاوش</span>}
             </button>
-          )}
-          <span className="px-4 py-2 text-gray-700">
-            {page} / {totalPages}
-          </span>
-          {page < totalPages && (
-            <button
-              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-              className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
-            >
-              <FaAngleDoubleRight />
-            </button>
-          )}
-        </div>
-      </div>
-      }
+          </div>
 
-   
+          <ResultSearch deleteArticles={deleteArticles} />
+
+          {/* Pagination */}
+          <div className="flex justify-center pb-10 my-4">
+            {page > 1 && (
+              <button
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                className="px-4 py-2 bg-blue-500 text-white rounded-l-md hover:bg-blue-600"
+              >
+                <FaAngleDoubleLeft />
+              </button>
+            )}
+            <span className="px-4 py-2 text-gray-700">
+              {page} / {totalPages}
+            </span>
+            {page < totalPages && (
+              <button
+                onClick={() =>
+                  setPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+              >
+                <FaAngleDoubleRight />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }

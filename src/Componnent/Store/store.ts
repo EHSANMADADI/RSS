@@ -10,6 +10,7 @@ type articles={
   title:string;
   published:string
   id:number
+  keywords:string[]
 }
 
 type Store = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdFilterListAlt } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useStore } from "./Store/store.ts";
@@ -6,14 +6,11 @@ import { TbMoodEmpty } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { CiSquareRemove } from "react-icons/ci";
 import api from "../Config/api.ts";
-export default function ResultSearch() {
-  const { articles,setArticles } = useStore();
-  const deleteArticles = (id: number) => {
-    api.delete(`/api/articles/${id}`).then(() => {
-      const newArticles = articles.filter((article) => article.id!== id);
-      setArticles(newArticles);
-    });
-  };
+interface delet{
+  deleteArticles:(id:number)=>void
+}
+export default function ResultSearch({deleteArticles}:delet) {
+  const { articles, setArticles } = useStore();
   return (
     <div>
       {articles.length === 0 && (
@@ -28,10 +25,10 @@ export default function ResultSearch() {
         <>
           <div className="flex items-center justify-between lg:w-1/2 w-11/12 mx-auto my-5">
             <div className="text-gray-500 text-lg flex items-center font-semibold ">
-              <span>
+              {/* <span>
                 <MdFilterListAlt />
-              </span>
-              <span>فیلتر کردن</span>
+              </span> */}
+              {/* <span>فیلتر کردن</span> */}
             </div>
             <span className="text-gray-500 text-lg font-semibold mx-1">
               : نتیجه جست‌وجو
@@ -50,6 +47,12 @@ export default function ResultSearch() {
                   <div className="flex items-center justify-between my-2">
                     <p className="text-gray-400 font-normal text-base">
                       {articel.source}
+                    </p>
+                    <p className="text-green-700 font-bold md:text-xl text-lg leading-8 mx-3">
+                      {articel.keywords &&
+                        articel.keywords.map((item) => {
+                          return <span className="mr-1">{item}</span>;
+                        })}
                     </p>
                     <p className="text-gray-400 font-normal text-base">
                       {articel.published}
