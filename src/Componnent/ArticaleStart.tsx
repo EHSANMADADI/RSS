@@ -6,13 +6,14 @@ import { FaAngleDoubleLeft } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { CiSquareRemove } from "react-icons/ci";
 import Loader from "../Image/tail-spin.svg";
-
+import Swal from "sweetalert2";
 export default function ArticaleStart() {
   const { articles, setArticles, keywords } = useStore();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const pageSize = 5;
+
   // useEffect(() => {
   //   if (keywords.length === 0) {
   //     api
@@ -30,16 +31,33 @@ export default function ArticaleStart() {
     try {
       setLoading(true);
       api
-        .get(`/api/articles?page=${page}&per_page=${pageSize}`)
-        .then((res) => {
-          setArticles(res.data.articles);
-          console.log("کاوش", res.data.articles);
-          setLoading(false);
-          setTotalPages(res.data.total_pages);
+        .get("/api/start-crawling")
+        .then((response) => {
+          api
+            .get(`/api/articles?page=${page}&per_page=${pageSize}`)
+            .then((res) => {
+              setArticles(res.data.articles);
+              console.log("کاوش", res.data.articles);
+              setLoading(false);
+              setTotalPages(res.data.total_pages);
+            })
+            .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.error("Error fetching articles:", err);
+          setLoading(false);
+          Swal.fire({
+            text: "در شروع کاوش اخبار مشکلی پیش آمده لطفا دوباره تلاش کنید",
+            icon: "error",
+          });
+        });
     } catch (err) {
       console.error("Error fetching articles:", err);
+      setLoading(false);
+      Swal.fire({
+        text: "در شروع کاوش اخبار مشکلی پیش آمده لطفا دوباره تلاش کنید",
+        icon: "error",
+      });
     }
   };
 
