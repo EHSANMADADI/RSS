@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MdFilterListAlt } from "react-icons/md";
+
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useStore } from "./Store/store.ts";
 import { TbMoodEmpty } from "react-icons/tb";
@@ -10,7 +10,7 @@ interface delet{
   deleteArticles:(id:number)=>void
 }
 export default function ResultSearch({deleteArticles}:delet) {
-  const { articles, setArticles } = useStore();
+  const { articles} = useStore();
   return (
     <div>
       {articles.length === 0 && (

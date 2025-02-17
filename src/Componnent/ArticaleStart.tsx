@@ -8,7 +8,7 @@ import { CiSquareRemove } from "react-icons/ci";
 import Loader from "../Image/tail-spin.svg";
 import Swal from "sweetalert2";
 export default function ArticaleStart() {
-  const { articles, setArticles, keywords } = useStore();
+  const { articles, setArticles } = useStore();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
